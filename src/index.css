@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-light text-dark flex justify-center min-h-screen;
+}
+
+#root {
+  @apply w-full min-h-screen;
+}
+
+.App {
+  @apply w-full min-h-screen;
+}
+
+header {
+  @apply bg-dark text-light flex items-center px-4 py-3 w-full text-2xl font-bold tracking-wide;
+}
+
+.add-step-form {
+  @apply absolute bottom-2 inset-x-8 flex items-center bg-white rounded-full shadow focus:shadow-lg;
+}
+
+.add-step-form input[type="number"] {
+  @apply bg-white text-dark rounded-l-full px-5 py-3 w-full text-lg focus:outline-none;
+}
+
+.add-step-form button[type="submit"] {
+  @apply bg-dark text-light rounded-full px-5 py-4 font-bold text-lg;
+}
+
+.add-step-form button[type="submit"] svg {
+  @apply fill-current;
+  height: 1.4em;
+}
+main {
+  @apply flex flex-col items-center w-full py-8;
+}
+
+.gs-list {
+  @apply w-full flex flex-col items-center mt-8;
+}
+
+.gs-row {
+  @apply flex items-end justify-between bg-light rounded-xl w-full px-4 py-2 mb-4;
+}
+
+.gs-details {
+  @apply tracking-normal;
+}
+
+.gs-date {
+  @apply text-gray-300 text-xs;
+}
+
+.gs-name {
+  @apply text-gray-400 text-xs ml-2;
+}
+
+.gs-value {
+  @apply font-bold text-2xl mr-1;
+}
+
+.gs-actions {
+  @apply flex gap-2;
+}
+
+.gs-done,
+.gs-paid,
+.gs-edit,
+.gs-delete {
+  @apply text-xs flex flex-col justify-center items-center text-center relative w-8;
+  font-size: 10px;
+}
+
+.gs-done svg,
+.gs-paid svg,
+.gs-edit svg,
+.gs-delete svg {
+  @apply h-5 w-5 mb-px;
+}
+
+.gs-check {
+  @apply absolute -top-1 -right-1 bg-green-600 text-white rounded-full p-1 flex items-center justify-center;
+}
+
+.gs-check svg {
+  @apply h-2 w-2 fill-current mb-0;
+}
+
+.gs-actions input {
+  @apply hidden;
+}
+
+.gs-actions label {
+  @apply flex flex-col items-center justify-center;
+}

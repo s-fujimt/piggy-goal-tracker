@@ -9,7 +9,7 @@ interface GoalStepsListProps {
 
 const GoalStepsList: React.FC<GoalStepsListProps> = ({ steps, setSteps }) => {
   return (
-    <div>
+    <div className="gs-list">
       {steps.map((step) => (
         <GoalStepRow
           step={step}
