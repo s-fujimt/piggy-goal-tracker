@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import GoalForm from "./components/GoalForm";
 import GoalStepsList from "./components/GoalStepsList";
 import InputField from "./components/InputField";
 import { useGoalSteps } from "./context/Context";
@@ -6,7 +7,7 @@ import { GoalStep } from "./model";
 
 const App: React.FC = () => {
   // todo make goal settingss
-  const goal = 100000;
+  const [goal, setGoal] = useState<number>(0);
   const [stepValue, setStepValue] = useState<string>("");
   const {
     state: { steps },
@@ -57,12 +58,16 @@ const App: React.FC = () => {
         PiggyGoals
       </header>
       <main>
-        <div>目標: {goal}円</div>
-        <div>現在: {calculateTotal(steps)}円</div>
-        <div>達成率: {calculatePercentage(calculateTotal(steps), goal)}%</div>
-        {/* todo add pig */}
-        {/* todo animate */}
-        {/* <svg
+        {goal ? (
+          <>
+            <div>目標: {goal}円</div>
+            <div>現在: {calculateTotal(steps)}円</div>
+            <div>
+              達成率: {calculatePercentage(calculateTotal(steps), goal)}%
+            </div>
+            {/* todo add pig */}
+            {/* todo animate */}
+            {/* <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 100 100"
             width="100"
@@ -91,12 +96,16 @@ const App: React.FC = () => {
               stroke-width="5"
             />
           </svg> */}
-        <InputField
-          stepValue={stepValue}
-          setStepValue={setStepValue}
-          handleAdd={handleAdd}
-        />
-        <GoalStepsList />
+            <InputField
+              stepValue={stepValue}
+              setStepValue={setStepValue}
+              handleAdd={handleAdd}
+            />
+            <GoalStepsList />
+          </>
+        ) : (
+          <GoalForm setGoal={setGoal} />
+        )}
       </main>
     </div>
   );
