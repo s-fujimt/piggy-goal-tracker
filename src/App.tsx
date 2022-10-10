@@ -1,35 +1,41 @@
 import React, { useState } from "react";
 import GoalStepsList from "./components/GoalStepsList";
 import InputField from "./components/InputField";
+import { useGoalSteps } from "./context/Context";
 import { GoalStep } from "./model";
 
 const App: React.FC = () => {
   // todo make goal settingss
   const goal = 100000;
   const [stepValue, setStepValue] = useState<string>("");
-  const [steps, setSteps] = useState<GoalStep[]>([]);
+  const {
+    state: { steps },
+    dispatch,
+  } = useGoalSteps();
 
   const handleAdd = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (stepValue) {
-      setSteps([
-        ...steps,
-        {
-          id: Date.now(),
-          name: "",
-          // TODO prevent input other than numbers
-          stepValue: parseFloat(stepValue) || 0,
-          //TODO add unit selection
-          unit: "円",
-          isDone: false,
-          isPaid: false,
-          date: new Date(),
-        },
-      ]);
+      const newStep = {
+        id: Date.now(),
+        name: "",
+        // TODO prevent input other than numbers
+        stepValue: parseFloat(stepValue) || 0,
+        //TODO add unit selection
+        unit: "円",
+        isDone: false,
+        isPaid: false,
+        date: new Date(),
+      };
+
+      dispatch({
+        type: "ADD_STEP",
+        payload: newStep,
+      });
+
       setStepValue("");
     }
-    console.log(steps);
   };
 
   //todo dont calculate multiple times
@@ -57,40 +63,40 @@ const App: React.FC = () => {
         {/* todo add pig */}
         {/* todo animate */}
         {/* <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 100 100"
-          width="100"
-          height="100"
-        >
-          <linearGradient id="lg" x1="0.5" y1="1" x2="0.5" y2="0">
-            <stop offset="0%" stop-opacity="1" stop-color="royalblue" />
-            <stop
-              offset={calculatePercentage(calculateTotal(steps), goal) + "%"}
-              stop-opacity="1"
-              stop-color="royalblue"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 100 100"
+            width="100"
+            height="100"
+          >
+            <linearGradient id="lg" x1="0.5" y1="1" x2="0.5" y2="0">
+              <stop offset="0%" stopOpacity="1" stopColor="royalblue" />
+              <stop
+                offset={calculatePercentage(calculateTotal(steps), goal) + "%"}
+                stopOpacity="1"
+                stopColor="royalblue"
+              />
+              <stop
+                offset={calculatePercentage(calculateTotal(steps), goal) + "%"}
+                stopOpacity="0"
+                stopColor="royalblue"
+              />
+              <stop offset="100%" stopOpacity="0" stopColor="royalblue" />
+            </linearGradient>
+            <circle
+              cx="50"
+              cy="50"
+              r="45"
+              fill="url(#lg)"
+              stroke="crimson"
+              stroke-width="5"
             />
-            <stop
-              offset={calculatePercentage(calculateTotal(steps), goal) + "%"}
-              stop-opacity="0"
-              stop-color="royalblue"
-            />
-            <stop offset="100%" stop-opacity="0" stop-color="royalblue" />
-          </linearGradient>
-          <circle
-            cx="50"
-            cy="50"
-            r="45"
-            fill="url(#lg)"
-            stroke="crimson"
-            stroke-width="5"
-          />
-        </svg> */}
+          </svg> */}
         <InputField
           stepValue={stepValue}
           setStepValue={setStepValue}
           handleAdd={handleAdd}
         />
-        <GoalStepsList steps={steps} setSteps={setSteps} />
+        <GoalStepsList />
       </main>
     </div>
   );

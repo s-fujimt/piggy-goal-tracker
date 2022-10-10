@@ -1,22 +1,16 @@
 import React from "react";
-import { GoalStep } from "../model";
+import { useGoalSteps } from "../context/Context";
 import GoalStepRow from "./GoalStepRow";
 
-interface GoalStepsListProps {
-  steps: GoalStep[];
-  setSteps: React.Dispatch<React.SetStateAction<GoalStep[]>>;
-}
+const GoalStepsList: React.FC = () => {
+  const {
+    state: { steps },
+  } = useGoalSteps();
 
-const GoalStepsList: React.FC<GoalStepsListProps> = ({ steps, setSteps }) => {
   return (
     <div className="gs-list">
       {steps.map((step) => (
-        <GoalStepRow
-          step={step}
-          key={step.id}
-          steps={steps}
-          setSteps={setSteps}
-        />
+        <GoalStepRow step={step} key={step.id} />
       ))}
     </div>
   );

@@ -1,56 +1,59 @@
 import React, { useEffect } from "react";
+import { useGoalSteps } from "../context/Context";
 import { GoalStep } from "../model";
 
 type GoalStepProps = {
   step: GoalStep;
-  steps: GoalStep[];
-  setSteps: React.Dispatch<React.SetStateAction<GoalStep[]>>;
 };
 
-const GoalStepRow: React.FC<GoalStepProps> = ({ step, steps, setSteps }) => {
+const GoalStepRow: React.FC<GoalStepProps> = ({ step }) => {
   const [edit, setEdit] = React.useState<boolean>(false);
   const [editValue, setEditValue] = React.useState<string>(
     step.stepValue.toString()
   );
 
-  const handleDone = (id: number) => {
-    setSteps(
-      steps.map((s) => {
-        if (s.id === id) {
-          return { ...s, isDone: !s.isDone };
-        }
-        return s;
-      })
-    );
+  const { dispatch } = useGoalSteps();
+
+  // add edit for each
+  const handleDone = (step: GoalStep) => {
+    dispatch({
+      type: "EDIT_STEP",
+      payload: {
+        ...step,
+        isDone: !step.isDone,
+      },
+    });
   };
 
-  const handlePaid = (id: number) => {
-    setSteps(
-      steps.map((s) => {
-        if (s.id === id) {
-          return { ...s, isPaid: !s.isPaid };
-        }
-        return s;
-      })
-    );
+  const handlePaid = (step: GoalStep) => {
+    dispatch({
+      type: "EDIT_STEP",
+      payload: {
+        ...step,
+        isPaid: !step.isPaid,
+      },
+    });
   };
 
   const handleDelete = (id: number) => {
-    setSteps(steps.filter((s) => s.id !== id));
+    dispatch({
+      type: "DELETE_STEP",
+      payload: id,
+    });
   };
 
   const handleEdit = (e: React.FormEvent, id: number) => {
     e.preventDefault();
-    setSteps(
-      steps.map((s) => {
-        if (s.id === id) {
-          return { ...s, stepValue: parseFloat(editValue) || 0 };
-        }
-        return s;
-      })
-    );
+    dispatch({
+      type: "EDIT_STEP",
+      payload: {
+        ...step,
+        stepValue: parseInt(editValue),
+      },
+    });
     setEdit(false);
   };
+
   const inputRef = React.useRef<HTMLInputElement>(null);
   useEffect(() => {
     inputRef.current?.focus();
@@ -85,7 +88,7 @@ const GoalStepRow: React.FC<GoalStepProps> = ({ step, steps, setSteps }) => {
             type="checkbox"
             id="gs-done"
             checked={step.isDone}
-            onChange={() => handleDone(step.id)}
+            onChange={() => handleDone(step)}
           />
           <label htmlFor="gs-done">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -108,7 +111,7 @@ const GoalStepRow: React.FC<GoalStepProps> = ({ step, steps, setSteps }) => {
             type="checkbox"
             id="gs-paid"
             checked={step.isPaid}
-            onChange={() => handlePaid(step.id)}
+            onChange={() => handlePaid(step)}
           />
           <label htmlFor="gs-paid">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
