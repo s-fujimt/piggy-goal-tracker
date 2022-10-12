@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { useGoalSteps } from "../context/Context";
 import Check from "../Icons/Check";
 import Delete from "../Icons/Delete";
@@ -18,6 +18,10 @@ const GoalStepRow: React.FC<GoalStepProps> = ({ step }) => {
   );
 
   const { dispatch } = useGoalSteps();
+
+  const formattedValue = useMemo(() => {
+    return step.stepValue.toLocaleString();
+  }, [step]);
 
   const handleDone = (step: GoalStep) => {
     dispatch({
@@ -81,7 +85,7 @@ const GoalStepRow: React.FC<GoalStepProps> = ({ step }) => {
             {step.name ? <span className="gs-name">{step.name}</span> : ""}
           </div>
           <div>
-            <span className="gs-value">{step.stepValue}</span>
+            <span className="gs-value">{formattedValue}</span>
             {step.unit}
           </div>
         </div>
