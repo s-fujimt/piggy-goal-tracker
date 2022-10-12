@@ -7,38 +7,10 @@ import Pig from "./Icons/Pig";
 import { GoalStep } from "./model";
 
 const App: React.FC = () => {
-  // todo make goal settingss
   const [goal, setGoal] = useState<number>(0);
-  const [stepValue, setStepValue] = useState<string>("");
   const {
     state: { steps },
-    dispatch,
   } = useGoalSteps();
-
-  const handleAdd = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (stepValue) {
-      const newStep = {
-        id: Date.now(),
-        name: "",
-        // TODO prevent input other than numbers
-        stepValue: parseFloat(stepValue) || 0,
-        //TODO add unit selection
-        unit: "円",
-        isDone: false,
-        isPaid: false,
-        date: new Date(),
-      };
-
-      dispatch({
-        type: "ADD_STEP",
-        payload: newStep,
-      });
-
-      setStepValue("");
-    }
-  };
 
   //todo dont calculate multiple times
   const calculateTotal = (steps: GoalStep[]) => {
@@ -95,11 +67,7 @@ const App: React.FC = () => {
               stroke-width="5"
             />
           </svg> */}
-            <InputField
-              stepValue={stepValue}
-              setStepValue={setStepValue}
-              handleAdd={handleAdd}
-            />
+            <InputField />
             <GoalStepsList />
           </>
         ) : (

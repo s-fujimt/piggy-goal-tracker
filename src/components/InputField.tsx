@@ -1,17 +1,36 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
+import { useGoalSteps } from "../context/Context";
 
-interface InputFieldProps {
-  stepValue: string;
-  setStepValue: React.Dispatch<React.SetStateAction<string>>;
-  handleAdd: (e: React.FormEvent) => void;
-}
-
-const InputField: React.FC<InputFieldProps> = ({
-  stepValue,
-  setStepValue,
-  handleAdd,
-}) => {
+const InputField: React.FC = ({}) => {
+  const [stepValue, setStepValue] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const { dispatch } = useGoalSteps();
+
+  const handleAdd = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (stepValue) {
+      const newStep = {
+        id: Date.now(),
+        name: "",
+        // TODO prevent input other than numbers
+        stepValue: parseFloat(stepValue) || 0,
+        //TODO add unit selection
+        unit: "円",
+        isDone: false,
+        isPaid: false,
+        date: new Date(),
+      };
+
+      dispatch({
+        type: "ADD_STEP",
+        payload: newStep,
+      });
+
+      setStepValue("");
+    }
+  };
 
   return (
     <form
