@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useGoalSteps } from "../context/Context";
 
-const InputField: React.FC = ({}) => {
+const InputField: React.FC = () => {
   const [stepValue, setStepValue] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
 
