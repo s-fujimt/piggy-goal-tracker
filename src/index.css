@@ -47,7 +47,7 @@ header {
 }
 
 .add-step-form {
-  @apply absolute bottom-2 inset-x-8 flex items-center bg-white rounded-full shadow focus:shadow-lg;
+  @apply fixed bottom-8 inset-x-8 flex items-center bg-white rounded-full shadow focus:shadow-lg z-20;
 }
 
 .add-step-form input[type="number"] {
@@ -62,8 +62,9 @@ header {
   @apply fill-current;
   height: 1.4em;
 }
+
 main {
-  @apply relative min-h-screen flex flex-col items-center w-full pt-24 pb-8;
+  @apply relative min-h-screen flex flex-col items-center w-full py-24;
 }
 
 .gs-list {

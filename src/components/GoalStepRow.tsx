@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useGoalSteps } from "../context/Context";
 import Check from "../Icons/Check";
 import Delete from "../Icons/Delete";
