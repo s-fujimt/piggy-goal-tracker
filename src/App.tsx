@@ -12,11 +12,13 @@ const App: React.FC = () => {
   const [goal, setGoal] = useState<number>(0);
 
   const initialGoal = useLiveQuery(async () => {
-    return db.settings.get("goal");
+    return (await db.settings.get("goal")) || { value: 0 };
   }, []);
 
   useEffect(() => {
-    if (initialGoal) {
+    if (initialGoal == null) {
+      setLoading(true);
+    } else {
       setGoal(Number(initialGoal.value));
       setLoading(false);
     }
