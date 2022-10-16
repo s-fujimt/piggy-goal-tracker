@@ -1,4 +1,6 @@
-import React, { createContext, useContext, useReducer } from "react";
+import { useLiveQuery } from "dexie-react-hooks";
+import React, { createContext, useContext, useEffect, useReducer } from "react";
+import { db } from "../db";
 import { ACTIONTYPE, initialState, STATE, stepReducer } from "./Reducers";
 
 interface ProviderInterface {
@@ -11,6 +13,19 @@ const Context = createContext(
 
 const Provider: React.FC<ProviderInterface> = ({ children }) => {
   const [state, dispatch] = useReducer(stepReducer, initialState);
+
+  const steps = useLiveQuery(async () => {
+    return db.steps.toArray();
+  }, []);
+
+  useEffect(() => {
+    if (steps) {
+      dispatch({
+        type: "SET_STEPS",
+        payload: steps,
+      });
+    }
+  }, [steps]);
 
   return (
     <Context.Provider value={{ state, dispatch }}>{children}</Context.Provider>

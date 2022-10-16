@@ -4,6 +4,7 @@ export type STATE = {
   steps: GoalStep[];
 };
 export type ACTIONTYPE =
+  | { type: "SET_STEPS"; payload: GoalStep[] }
   | { type: "ADD_STEP"; payload: GoalStep }
   | { type: "EDIT_STEP"; payload: GoalStep }
   | { type: "DELETE_STEP"; payload: number };
@@ -14,6 +15,12 @@ export const initialState: STATE = {
 
 export const stepReducer = (state: STATE, action: ACTIONTYPE): STATE => {
   switch (action.type) {
+    case "SET_STEPS": {
+      return {
+        ...state,
+        steps: action.payload,
+      };
+    }
     case "ADD_STEP": {
       return {
         ...state,

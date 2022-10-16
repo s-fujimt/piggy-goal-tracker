@@ -1,4 +1,5 @@
 import React from "react";
+import { db } from "../db";
 
 interface GoalFormProps {
   setGoal: React.Dispatch<React.SetStateAction<number>>;
@@ -10,6 +11,7 @@ const GoalForm: React.FC<GoalFormProps> = ({ setGoal }) => {
     const form = e.target as HTMLFormElement;
     const input = form.elements.namedItem("goal") as HTMLInputElement;
     const goal = Number(input.value);
+    db.settings.put({ key: "goal", value: goal.toString() });
     setGoal(goal);
   };
 

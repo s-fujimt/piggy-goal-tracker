@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo } from "react";
 import { useGoalSteps } from "../context/Context";
+import { db } from "../db";
 import Check from "../Icons/Check";
 import Delete from "../Icons/Delete";
 import Edit from "../Icons/Edit";
@@ -24,6 +25,7 @@ const GoalStepRow: React.FC<GoalStepProps> = ({ step }) => {
   }, [step]);
 
   const handleDone = (step: GoalStep) => {
+    db.steps.update(step.id, { isDone: !step.isDone });
     dispatch({
       type: "EDIT_STEP",
       payload: {
@@ -34,6 +36,7 @@ const GoalStepRow: React.FC<GoalStepProps> = ({ step }) => {
   };
 
   const handlePaid = (step: GoalStep) => {
+    db.steps.update(step.id, { isPaid: !step.isPaid });
     dispatch({
       type: "EDIT_STEP",
       payload: {
@@ -44,6 +47,7 @@ const GoalStepRow: React.FC<GoalStepProps> = ({ step }) => {
   };
 
   const handleDelete = (id: number) => {
+    db.steps.delete(id);
     dispatch({
       type: "DELETE_STEP",
       payload: id,
@@ -52,6 +56,7 @@ const GoalStepRow: React.FC<GoalStepProps> = ({ step }) => {
 
   const handleEdit = (e: React.FormEvent, id: number) => {
     e.preventDefault();
+    db.steps.update(id, { stepValue: parseInt(editValue) });
     dispatch({
       type: "EDIT_STEP",
       payload: {
@@ -86,7 +91,6 @@ const GoalStepRow: React.FC<GoalStepProps> = ({ step }) => {
           </div>
           <div>
             <span className="gs-value">{formattedValue}</span>
-            {step.unit}
           </div>
         </div>
       )}

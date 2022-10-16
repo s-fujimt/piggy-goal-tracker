@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useGoalSteps } from "../context/Context";
+import { db } from "../db";
 
 const InputField: React.FC = () => {
   const [stepValue, setStepValue] = useState<string>("");
@@ -23,9 +24,11 @@ const InputField: React.FC = () => {
         date: new Date(),
       };
 
-      dispatch({
-        type: "ADD_STEP",
-        payload: newStep,
+      db.steps.add(newStep).then(() => {
+        dispatch({
+          type: "ADD_STEP",
+          payload: newStep,
+        });
       });
 
       setStepValue("");

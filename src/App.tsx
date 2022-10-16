@@ -1,25 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
 import GoalForm from "./components/GoalForm";
 import GoalOverview from "./components/GoalOverview";
 import InputField from "./components/InputField";
 import GoalStepsList from "./components/GoalStepsList";
+import { db } from "./db";
+import { useLiveQuery } from "dexie-react-hooks";
 
 const App: React.FC = () => {
+  const [loading, setLoading] = useState(true);
   const [goal, setGoal] = useState<number>(0);
+
+  const initialGoal = useLiveQuery(async () => {
+    return db.settings.get("goal");
+  }, []);
+
+  useEffect(() => {
+    if (initialGoal) {
+      setGoal(Number(initialGoal.value));
+      setLoading(false);
+    }
+  }, [initialGoal]);
 
   return (
     <div className="App">
       <Header />
       <main>
-        {goal ? (
-          <>
-            <GoalOverview goal={goal} />
-            <InputField />
-            <GoalStepsList />
-          </>
+        {loading ? (
+          <div className="loading">Loading...</div>
         ) : (
-          <GoalForm setGoal={setGoal} />
+          <>
+            {goal ? (
+              <>
+                <GoalOverview goal={goal} />
+                <InputField />
+                <GoalStepsList />
+              </>
+            ) : (
+              <GoalForm setGoal={setGoal} />
+            )}
+          </>
         )}
       </main>
     </div>
