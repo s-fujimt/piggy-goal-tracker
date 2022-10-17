@@ -15,7 +15,11 @@ body {
 }
 
 header {
-  @apply bg-dark text-light flex items-center justify-between px-4 py-3 w-full text-2xl font-bold tracking-wide fixed top-0 z-10;
+  @apply fixed top-0 z-10 bg-dark flex justify-center items-center w-screen;
+}
+
+.header-inner {
+  @apply max-w-3xl text-light flex items-center justify-between px-4 py-3 w-full text-2xl font-bold tracking-wide;
 }
 
 .header-left {
@@ -54,7 +58,7 @@ header {
 }
 
 .add-step-form {
-  @apply fixed bottom-8 inset-x-8 flex items-center bg-white rounded-full shadow focus:shadow-lg z-20;
+  @apply fixed bottom-8 lg:bottom-20 inset-x-8 flex items-center bg-white rounded-full shadow focus:shadow-lg z-20 max-w-2xl mx-auto;
 }
 
 .add-step-form input[type="number"] {
@@ -71,7 +75,7 @@ header {
 }
 
 main {
-  @apply relative min-h-screen flex flex-col items-center w-full pt-20 pb-24;
+  @apply relative min-h-screen flex flex-col items-center w-full pt-20 lg:pt-32 pb-24;
 }
 
 .gs-list {

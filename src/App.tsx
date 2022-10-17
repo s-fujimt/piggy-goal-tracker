@@ -32,7 +32,7 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <Header openSettings={() => setIsSettingsOpen(true)} />
-      <main>
+      <main className="container mx-auto max-w-2xl">
         {loading ? (
           <div className="loading">Loading...</div>
         ) : (
