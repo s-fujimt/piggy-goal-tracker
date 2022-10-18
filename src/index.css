@@ -30,15 +30,15 @@ header {
 }
 
 .set-goal-popup {
-  @apply absolute top-0 left-0 right-0  w-full h-full flex justify-center items-center bg-black bg-opacity-50;
+  @apply fixed top-0 left-0 right-0  w-full h-full flex justify-center items-center bg-black bg-opacity-50;
 }
 
 .set-goal-inner {
-  @apply bg-light w-3/4 py-12 px-8  rounded-lg shadow-lg;
+  @apply bg-light w-3/4 max-w-xl py-8 px-8 rounded-lg shadow-lg;
 }
 
 .set-goal-title {
-  @apply text-2xl font-bold text-center mb-8;
+  @apply text-xl font-bold text-center mb-8;
 }
 
 .set-goal-popup form {
@@ -54,7 +54,7 @@ header {
 }
 
 .set-goal-popup button {
-  @apply bg-dark text-light p-2 rounded-lg shadow-lg mt-4;
+  @apply bg-dark text-sm font-bold text-light p-2 rounded-lg shadow-lg;
 }
 
 .add-step-form {

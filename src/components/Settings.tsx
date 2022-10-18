@@ -30,10 +30,10 @@ const Settings: React.FC<SettingsProps> = ({
     closeSettings();
   };
 
-  const handleResetSettings = () => {
+  const handleResetEverything = () => {
     db.settings.clear();
+    db.steps.clear();
     setGoal(0);
-    closeSettings();
   };
 
   return (
@@ -58,9 +58,20 @@ const Settings: React.FC<SettingsProps> = ({
               />
               <button type="submit">目標を変更</button>
             </form>
-            <hr />
-            <div onClick={handleRemoveAllSteps}>Remove all steps</div>
-            <div onClick={handleResetSettings}>Reset everything</div>
+            <div className="pt-4 border-t items-center justify-center mt-8 text-xs lg:text-sm underline text-red-600 flex flex-col lg:flex-row gap-2 lg:gap-8">
+              <div
+                onClick={handleRemoveAllSteps}
+                className="cursor-pointer hover:opacity-50 transition-all"
+              >
+                Remove all steps
+              </div>
+              <div
+                onClick={handleResetEverything}
+                className="cursor-pointer hover:opacity-50 transition-all"
+              >
+                Reset everything
+              </div>
+            </div>
           </>
         ) : (
           <>
