@@ -25,6 +25,17 @@ const Settings: React.FC<SettingsProps> = ({
     closeSettings();
   };
 
+  const handleRemoveAllSteps = () => {
+    db.steps.clear();
+    closeSettings();
+  };
+
+  const handleResetSettings = () => {
+    db.settings.clear();
+    setGoal(0);
+    closeSettings();
+  };
+
   return (
     <div className="set-goal-popup">
       <div className="set-goal-inner">
@@ -47,6 +58,9 @@ const Settings: React.FC<SettingsProps> = ({
               />
               <button type="submit">目標を変更</button>
             </form>
+            <hr />
+            <div onClick={handleRemoveAllSteps}>Remove all steps</div>
+            <div onClick={handleResetSettings}>Reset everything</div>
           </>
         ) : (
           <>
