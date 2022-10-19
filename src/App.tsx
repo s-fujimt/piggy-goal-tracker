@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Settings from "./components/Settings";
 import GoalOverview from "./components/GoalOverview";
-import InputField from "./components/InputField";
+import AddGoalStep from "./components/AddGoalStepField";
 import GoalStepsList from "./components/GoalStepsList";
 import { db } from "./db";
 import { useLiveQuery } from "dexie-react-hooks";
@@ -46,7 +46,7 @@ const App: React.FC = () => {
             ) : (
               <>
                 <GoalOverview goal={goal} />
-                <InputField />
+                <AddGoalStep />
                 <GoalStepsList />
               </>
             )}
