@@ -1,3 +1,5 @@
+import React from "react";
+
 const Work = () => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -6,4 +8,4 @@ const Work = () => {
   );
 };
 
-export default Work;
+export default React.memo(Work);

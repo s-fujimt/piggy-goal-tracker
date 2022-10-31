@@ -1,3 +1,5 @@
+import React from "react";
+
 const Money = () => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
@@ -6,4 +8,4 @@ const Money = () => {
   );
 };
 
-export default Money;
+export default React.memo(Money);

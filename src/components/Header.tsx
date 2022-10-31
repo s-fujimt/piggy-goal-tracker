@@ -1,3 +1,4 @@
+import React from "react";
 import Pig from "../Icons/Pig";
 
 interface HeaderProps {

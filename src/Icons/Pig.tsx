@@ -1,3 +1,5 @@
+import React from "react";
+
 const Pig = () => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
@@ -6,4 +8,4 @@ const Pig = () => {
   );
 };
 
-export default Pig;
+export default React.memo(Pig);

@@ -96,6 +96,13 @@ main {
 .gs-date {
   @apply text-gray-300 text-xs;
 }
+.gs-date label {
+  line-height: 0;
+}
+
+.gs-date svg {
+  @apply text-gray-600 fill-current w-4 h-4;
+}
 
 .gs-name {
   @apply text-gray-400 text-xs ml-2;
@@ -113,7 +120,7 @@ main {
 .gs-paid,
 .gs-edit,
 .gs-delete {
-  @apply text-xs flex flex-col justify-center items-center text-center relative w-8;
+  @apply text-xs flex flex-col justify-center items-center text-center relative w-8 cursor-pointer;
   font-size: 10px;
 }
 
@@ -121,7 +128,14 @@ main {
 .gs-paid svg,
 .gs-edit svg,
 .gs-delete svg {
-  @apply h-5 w-5 mb-px fill-primary hover:fill-secondary transition-all;
+  @apply h-5 w-5 mb-px fill-primary;
+}
+
+.gs-done:hover svg,
+.gs-paid:hover svg,
+.gs-edit:hover svg,
+.gs-delete:hover svg {
+  @apply fill-secondary transition-all;
 }
 
 .gs-check {
@@ -175,4 +189,10 @@ main {
 
 .goal-overview-absolute {
   @apply text-gray-600 text-xs;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
