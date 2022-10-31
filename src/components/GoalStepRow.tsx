@@ -79,7 +79,7 @@ const GoalStepRow: React.FC<GoalStepProps> = ({ step }) => {
     <form onSubmit={(e) => handleEdit(e, step.id)} className="gs-row">
       <div className="gs-details">
         <div>
-          <span className="gs-date flex gap-2">
+          <span className="gs-date flex gap-2 items-center">
             {edit
               ? editDate.toLocaleDateString("ja-JP")
               : step.date.toLocaleDateString("ja-JP")}
@@ -104,7 +104,7 @@ const GoalStepRow: React.FC<GoalStepProps> = ({ step }) => {
         </div>
         {edit ? (
           <input
-            className="rounded-xl border-gray-300 p-2 border-2 mt-2 w-full"
+            className="rounded-lg shadow-sm text-sm  py-1 px-2 mt-1 w-full focus:outline-none"
             ref={inputRef}
             type="number"
             value={editValue}

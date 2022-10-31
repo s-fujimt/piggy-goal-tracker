@@ -90,7 +90,7 @@ main {
 }
 
 .gs-details {
-  @apply tracking-normal;
+  @apply tracking-normal w-1/2;
 }
 
 .gs-date {
@@ -101,7 +101,7 @@ main {
 }
 
 .gs-date svg {
-  @apply text-gray-600 fill-current w-4 h-4;
+  @apply text-gray-600 fill-current w-3 h-3;
 }
 
 .gs-name {

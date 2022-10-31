@@ -85,4 +85,4 @@ const AddGoalStep: React.FC = () => {
   );
 };
 
-export default AddGoalStep;
+export default React.memo(AddGoalStep);

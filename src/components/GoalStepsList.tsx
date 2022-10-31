@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useMemo } from "react";
 import { useGoalSteps } from "../context/Context";
 import GoalStepRow from "./GoalStepRow";
 
@@ -7,9 +7,15 @@ const GoalStepsList: React.FC = () => {
     state: { steps },
   } = useGoalSteps();
 
+  const sortedSteps = useMemo(() => {
+    return steps.sort((a, b) => {
+      return b.date.getTime() - a.date.getTime();
+    });
+  }, [steps]);
+
   return (
     <div className="gs-list">
-      {steps.map((step) => (
+      {sortedSteps.map((step) => (
         <GoalStepRow step={step} key={step.id} />
       ))}
     </div>
